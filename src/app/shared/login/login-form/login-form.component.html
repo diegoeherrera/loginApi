@@ -1,0 +1,19 @@
+<form [formGroup]="loginForm" (ngSubmit)="processForm(loginForm.value)">
+  <div class="form-group">
+    <label>email</label>
+    <input type="text"  class="form-control" formControlName="email"/>
+  </div>
+  <div class="form-group">
+    <label>password</label>
+    <input type="password" class="form-control" formControlName="password"/>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </div>
+  <div>
+    <p>Don't have an account? Please <a routerLink="/register">Register</a> | Forgot your password? <a href='#'>Change my password</a></p>
+  </div>
+
+
+
+</form>
