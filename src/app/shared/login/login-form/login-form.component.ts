@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LoginService } from '../login.service';
 import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -11,7 +13,7 @@ import { User } from '../../models/user.model';
 })
 export class LoginFormComponent implements OnInit {
   public loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private loginService: LoginService) {
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
     this.loginForm = this.createLoginForm()
   }
   ngOnInit(): void {}
@@ -29,7 +31,15 @@ export class LoginFormComponent implements OnInit {
 
   public processForm(user: User){
 
-    this.loginService.logUser(user).subscribe((resp)=>console.log(resp));
+    this.loginService.logUser(user).subscribe((resp)=> this.proccessResponse(resp));
+
+  }
+
+  proccessResponse(user){
+
+    if(user && this.loginService.isLoggedIn()){
+      this.router.navigate(['privado']);
+    }
 
   }
 
